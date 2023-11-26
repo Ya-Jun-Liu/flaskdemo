@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import wikipedia
 
 app = Flask(__name__)
+# Creates a Flask web application
 # Set the secret key. Keep this really secret:
 app.secret_key = 'IT@JCUA0Zr98j/3yXa R~XHH!jmN]LWX/,?RT'
 
@@ -13,7 +14,7 @@ def home():
 
 @app.route('/about')
 def about():
-    return "I am still working on this"
+    return render_template("about.html")
 
 
 @app.route('/search', methods=['POST', 'GET'])
@@ -21,6 +22,8 @@ def search():
     if request.method == 'POST':
         session['search_term'] = request.form['search']
         return redirect(url_for('results'))
+    # url_for() is a function that returns the correct URL for a given view/route function
+    # so that you don't have to know the exact path.
     return render_template("search.html")
 
 
